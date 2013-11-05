@@ -1,0 +1,4 @@
+*.pyc
+*.zip
+*.csv
+local_settings.py
