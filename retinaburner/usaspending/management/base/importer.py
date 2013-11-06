@@ -3,7 +3,6 @@ import os.path
 import fnmatch
 import time
 import datetime
-import shutil
 
 from retinaburner.usaspending.utils.log import set_up_logger
 from django.core.management.base import BaseCommand, CommandError
@@ -155,7 +154,7 @@ class BaseImporter(BaseCommand):
             # save this as a courtesy for tests, since they need to move the archived (timestampped) file back
             self.archived_file_path = os.path.join(self.DONE_DIR, new_name)
 
-            shutil.copyfile(os.path.join(self.IN_DIR, name), self.archived_file_path)
+            os.rename(os.path.join(self.IN_DIR, name), self.archived_file_path)
 
 
     def die_if_already_running(self):
