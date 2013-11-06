@@ -1,6 +1,7 @@
 from retinaburner.usaspending.management.base.importer import BaseImporter
 from django.db.models.fields import CharField
 from retinaburner.usaspending.utils.ucsv import UnicodeDictReader, UnicodeWriter
+from django.conf import settings
 import os.path
 import re
 
@@ -14,10 +15,10 @@ class BaseUSASpendingConverter(BaseImporter):
         most current set of files should be symlinked to "latest".
     """
 
-    IN_DIR =       '/home/usaspend/usaspending/latest/datafeeds'
-    DONE_DIR =     '/home/usaspend/usaspending/latest/DONE'
-    REJECTED_DIR = '/home/usaspend/usaspending/latest/REJECTED'
-    OUT_DIR =      '/home/usaspend/usaspending/latest/OUT'
+    IN_DIR =       settings.CSV_PATH + 'datafeeds'
+    DONE_DIR =     settings.CSV_PATH + 'done'
+    REJECTED_DIR = settings.CSV_PATH + 'rejected'
+    OUT_DIR =      settings.CSV_PATH + 'out'
     FILE_PATTERN = '*_All_*.csv'  # bash-style, ala '*.sql'
 
     email_subject = 'Unhappy USASpending App'

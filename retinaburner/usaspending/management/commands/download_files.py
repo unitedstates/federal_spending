@@ -1,14 +1,23 @@
 from django.core.management.base import BaseCommand
-import subprocess
 from django.conf import settings
-
+import os
+import urllib
+import zipfile
 
 class Command(BaseCommand):
 
     def handle(self, download_file, **options):
-    	#walk through download file and store everything in CSVs folder.
-    	root_path = settings.PROJECT_ROOT
-    	print root_path
-    	for line in open(download_file).xreadlines():
-	    	outfile_name = root_path + '/usaspending/downloads/csvs/' + line.split('/')[-1]
-	    	subprocess.Popen(["wget", line, "-O", outfile_name ])
+        #walk through download file and store everything in CSVs folder.
+        csv_path = settings.CSV_PATH
+        for line in open(download_file).xreadlines():
+            line = line.strip()
+            print "Reading file " + line
+            outfile_name = csv_path + line.split('/')[-1]
+            print "saving to " + outfile_name
+            urllib.urlretrieve(line, outfile_name)
+
+        for f in os.listdir(csv_path):
+            if f[-3:] == 'zip':
+                print "unzipping " + f
+                zf = zipfile.ZipFile(csv_path + f)
+                zf.extractall(csv_path)

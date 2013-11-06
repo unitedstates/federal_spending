@@ -3,11 +3,12 @@ import os.path
 import fnmatch
 import time
 import datetime
+import shutil
 
-from retinaburner.usaspending.utils.log            import set_up_logger
+from retinaburner.usaspending.utils.log import set_up_logger
 from django.core.management.base import BaseCommand, CommandError
-from optparse                    import make_option
-from django.conf                 import settings
+from optparse import make_option
+from django.conf import settings
 
 
 class BaseImporter(BaseCommand):
@@ -126,7 +127,10 @@ class BaseImporter(BaseCommand):
 
     def reject_file(self, path):
         if not self.dry_run:
+            print path
             name = os.path.basename(path)
+            print os.path.join(self.IN_DIR, name)
+            print os.path.join(self.REJECTED_DIR, name)
             os.rename(os.path.join(self.IN_DIR, name), os.path.join(self.REJECTED_DIR, name))
 
 
@@ -151,16 +155,16 @@ class BaseImporter(BaseCommand):
             # save this as a courtesy for tests, since they need to move the archived (timestampped) file back
             self.archived_file_path = os.path.join(self.DONE_DIR, new_name)
 
-            os.rename(os.path.join(self.IN_DIR, name), self.archived_file_path)
+            shutil.copyfile(os.path.join(self.IN_DIR, name), self.archived_file_path)
 
 
     def die_if_already_running(self):
         """
             Make sure this script is not already running in another process.
         """
-        if os.path.exists(self.pid_file_path):
-            raise CommandError("This script is already running in a separate process. (Check {0})".format(self.pid_file_path))
-
+        #if os.path.exists(self.pid_file_path):
+         #   raise CommandError("This script is already running in a separate process. (Check {0})".format(self.pid_file_path))
+        pass
 
     def set_pid_file(self):
         fh = open(self.pid_file_path, 'w')

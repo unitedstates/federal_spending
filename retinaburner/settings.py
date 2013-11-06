@@ -6,9 +6,8 @@ TEMPLATE_DEBUG = DEBUG
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Kaitlin Devine', 'kdevine@sunlightfoundation.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -159,3 +158,9 @@ LOGGING = {
         },
     }
 }
+
+TMP_DIRECTORY = PROJECT_ROOT + '/tmp'
+CSV_PATH = PROJECT_ROOT + '/usaspending/downloads/csvs/'
+LOGGING_DIRECTORY = PROJECT_ROOT + '/usaspending/logs'
+from local_settings import *
+
