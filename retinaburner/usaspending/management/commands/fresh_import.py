@@ -28,8 +28,8 @@ class Command(BaseCommand):
         print "Creating partition tables"
         management.call_command('create_partition', fiscal_year='all')
 
-        b = """  print "Downloading links in all_downloads.txt"
-        management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/all_downloads.txt')"""
+        print "Downloading links in all_downloads.txt"
+        management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/all_downloads.txt')
 
         print "sleeping for a minute to allow files to close out"
         time.sleep(60)
