@@ -22,9 +22,11 @@ To get started, install the dependencies while in an [activated python virtal en
 
     pip install -r requirements.txt
 
+For the USASpending data, you will need to specify which fiscal years you want to pull in by editing a list in the settings file called "FISCAL_YEARS". The default is 2000-2014.
 
 Importing Contracts
 --------------------
+
 The download, cleaning and import processes are Django management commands. To tell the command which files to download, pass it a single argument, the path to a file with the urls to be downloaded. It's expecting urls of the form
 
 http://www.usaspending.gov/datafeeds/2013_All_Contracts_Full_20131015.csv.zip
@@ -39,5 +41,25 @@ To convert these raw csvs into more normalized data, you need to run the convert
 
 That will take any csvs out of the datafeeds folder, process them and put the result in the out folder. The source file will then have a timestamp prepended to the name and it will be moved to the done folder. If there is a problem with any file or year, you'll need to address the problem, and move the source files __back__ to the datafeeds folder and then remove the timestamp. 
 
+You can stop here if you are not using Postgresql for your database. 
+
+POSTGRESQL Setup
+
+-get stopwords file
+-symlink to postgresql text search data dir
+-run tsconfig.sql to create the text search config and dictionary that is used in other indexes
+-run the commands to build the partition tables
 
 
+Copy CSVs in to Postgresql
+
+python -c "from retinaburner.usaspending.scripts.usaspending.contracts_loader import Loader; Loader().print_sql('/path/to/contracts_2013.csv')"
+
+this prints the sql. Copy that into the dbshell command
+
+---- > turn all this into one command
+
+create indexes 
+./manage.py dbshell < retinaburner/usaspending/scripts/usaspending/grants_indexes.sql
+
+run tests to ensure import --> write tests, check against usaspending api

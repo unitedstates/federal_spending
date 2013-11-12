@@ -1,4 +1,4 @@
-from fpds import FIELDS, CALCULATED_FIELDS
+from faads import FIELDS, CALCULATED_FIELDS
 import os.path
 from django.db import connection
 from django.db import transaction
@@ -8,7 +8,7 @@ class Loader():
         return [ x[0] for x in FIELDS ] + [ x[0] for x in CALCULATED_FIELDS ]
 
     def sql_str(self, infile):
-        table = 'usaspending_contract'
+        table = 'usaspending_grant'
         return self.sql_template_postgres(infile, table, self.fields())
 
     def print_sql(self, infile):
@@ -25,11 +25,7 @@ class Loader():
         """.format(os.path.abspath(file_), table, ', '.join(fields))
 
     @transaction.commit_on_success
-    def insert_fpds(self, infile):
+    def insert_faads(self, infile):
         sql = self.sql_str(infile)
-        print "got string"
         cursor = connection.cursor()
         cursor.execute(sql);
-        print "done executing"
-
-

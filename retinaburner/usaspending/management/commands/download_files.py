@@ -21,3 +21,6 @@ class Command(BaseCommand):
                 print "unzipping " + f
                 zf = zipfile.ZipFile(csv_path + f)
                 zf.extractall(csv_path)
+
+                #get rid of zipfile after unzipping
+                os.remove(csv_path + f)

@@ -126,10 +126,7 @@ class BaseImporter(BaseCommand):
 
     def reject_file(self, path):
         if not self.dry_run:
-            print path
             name = os.path.basename(path)
-            print os.path.join(self.IN_DIR, name)
-            print os.path.join(self.REJECTED_DIR, name)
             os.rename(os.path.join(self.IN_DIR, name), os.path.join(self.REJECTED_DIR, name))
 
 
@@ -181,4 +178,4 @@ class BaseImporter(BaseCommand):
         """
         now_epoch = time.time()
         last_modified_epoch = os.path.getmtime(file_path)
-        return now_epoch - last_modified_epoch > 60
+        return now_epoch - last_modified_epoch > 20
