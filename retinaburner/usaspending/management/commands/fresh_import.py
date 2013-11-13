@@ -12,7 +12,6 @@ class Command(BaseCommand):
 
     def handle(self, **options):
 
-        #put a check in here -- are you sure?
         confirm = raw_input("This will delete all USASpending related tables, indexes, etc. Are you sure you want to proceed? y\\n ")
         if confirm != 'y':
             return
@@ -39,24 +38,16 @@ class Command(BaseCommand):
         management.call_command('convert_usaspending_grants', '--traceback')
 
         print "Putting processed Contract CSVs in database"
-        print "Current number of rows in contract table: {0}".format(Contract.objects.all().count())
-
         print settings.CSV_PATH + 'out/'
         for fname in os.listdir(settings.CSV_PATH + 'out/'):
             print fname
             if 'contracts' in fname:
                 management.call_command('loadcontracts', settings.CSV_PATH + 'out/' + fname)
 
-        print "New number of rows in contract table: {0}".format(Contract.objects.all().count())
-
         print"Putting processed Grant CSVs in database"
-        print "Current number of rows in grant table: {0}".format(Grant.objects.all().count())
-
         for fname in os.listdir(settings.CSV_PATH + 'out/'):
             print fname
             if 'grants' in fname:
                 management.call_command('loadgrants', settings.CSV_PATH + 'out/' + fname)
                 
-        print "New number of rows in grant table: {0}".format(Grant.objects.all().count())
-
     
