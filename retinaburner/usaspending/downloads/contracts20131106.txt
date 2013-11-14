@@ -1,2 +1,0 @@
-http://usaspending.gov/datafeeds/2013_All_Contracts_Delta_20131015.csv.zip
-http://usaspending.gov/datafeeds/2013_All_Contracts_Delta_20130917.csv.zip

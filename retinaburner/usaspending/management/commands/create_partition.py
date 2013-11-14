@@ -53,7 +53,8 @@ class Command(BaseCommand):
         c = connections['default'].cursor()
         c.execute(create_stmt)
         print "table created"
-        for i, colname in enumerate(INDEX_COLS_BY_TABLE[base_table]):
+        
+        a = """for i, colname in enumerate(INDEX_COLS_BY_TABLE[base_table]):
             if 'using' in colname or '(' in colname:
                 idx_stmt = 'create index {0} on {1} {2}; commit;'.format(
                     partition_name + '_{0}'.format(i),
@@ -66,4 +67,4 @@ class Command(BaseCommand):
                     partition_name,
                     colname
                 )
-            c.execute(idx_stmt)
+            c.execute(idx_stmt)"""

@@ -10,7 +10,7 @@ import time
 
 class Command(BaseCommand):
 
-    def handle(self, **options):
+    def handle(self, import_file='all_downloads.txt', **options):
 
         confirm = raw_input("This will delete all USASpending related tables, indexes, etc. Are you sure you want to proceed? y\\n ")
         if confirm != 'y':
@@ -27,8 +27,8 @@ class Command(BaseCommand):
         print "Creating partition tables"
         management.call_command('create_partition', fiscal_year='all')
 
-        print "Downloading links in all_downloads.txt"
-        management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/all_downloads.txt')
+        print "Downloading links in {0}".format(import_file) 
+        management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/' + import_file)
 
         print "sleeping for a minute to allow files to close out"
         time.sleep(60)
@@ -49,5 +49,8 @@ class Command(BaseCommand):
             print fname
             if 'grants' in fname:
                 management.call_command('loadgrants', settings.CSV_PATH + 'out/' + fname)
+
+        print "Creating partition tables"
+        management.call_command('create_partition_indexes')
                 
     

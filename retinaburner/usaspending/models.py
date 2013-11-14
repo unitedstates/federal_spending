@@ -4,7 +4,7 @@ import retinaburner.usaspending
 
 
 class Contract(models.Model):
-    unique_transaction_id = models.CharField(max_length=32, unique=True)
+    unique_transaction_id = models.CharField(max_length=32)
     transaction_status = models.CharField(max_length=32, blank=True)
     obligatedamount = models.DecimalField(default=0, max_digits=20, decimal_places=2, blank=True, null=True)
     baseandexercisedoptionsvalue = models.DecimalField(default=0, max_digits=20, decimal_places=2, blank=True, null=True)
@@ -336,7 +336,7 @@ class Grant(models.Model):
     fyq_correction = models.CharField(max_length=5, blank=True)
     starting_date = models.DateField(blank=True, null=True)
     transaction_status = models.CharField(max_length=32, blank=True)
-    unique_transaction_id = models.CharField(max_length=32, unique=True)
+    unique_transaction_id = models.CharField(max_length=32)
     
     class Meta:
         ordering = ('fiscal_year','id')

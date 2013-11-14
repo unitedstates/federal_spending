@@ -1,5 +1,0 @@
-http://www.usaspending.gov/datafeeds/2013_All_Contracts_Full_20131015.csv.zip
-http://www.usaspending.gov/datafeeds/2013_All_Grants_Full_20131015.csv.zip
-http://www.usaspending.gov/datafeeds/2013_All_Loans_Full_20131015.csv.zip
-http://www.usaspending.gov/datafeeds/2013_All_DirectPayments_Full_20131015.csv.zip
-http://www.usaspending.gov/datafeeds/2013_All_Insurance_Full_20131015.csv.zip
