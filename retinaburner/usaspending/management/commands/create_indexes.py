@@ -70,6 +70,9 @@ class Command(BaseCommand):
     def create_partition_indexes(self, base_table, partition_name):
         c = connections['default'].cursor()
         for i, colname in enumerate(INDEX_COLS_BY_TABLE[base_table]):
+            
+            del_stmt = 'drop index if exists {0}_{1}; commit;'.format(partition_name, i)
+
             if 'using' in colname or '(' in colname:
                 idx_stmt = 'create index {0} on {1} {2}; commit;'.format(
                     partition_name + '_{0}'.format(i),
@@ -82,6 +85,7 @@ class Command(BaseCommand):
                     partition_name,
                     colname
                 )
+            c.execute(del_stmt)
             c.execute(idx_stmt)
 
         #create overall indexes 
