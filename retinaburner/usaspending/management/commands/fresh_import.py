@@ -50,7 +50,6 @@ class Command(BaseCommand):
             if 'grants' in fname:
                 management.call_command('loadgrants', settings.CSV_PATH + 'out/' + fname)
 
-        print "Creating partition tables"
-        management.call_command('create_partition_indexes')
-                
-    
+        print "Creating partition indexes"
+        management.call_command('create_indexes')
+
