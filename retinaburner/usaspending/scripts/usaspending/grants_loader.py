@@ -22,6 +22,7 @@ class Loader():
             DELIMITER '|' \
             CSV QUOTE '"' \
             NULL 'NULL' \
+            (PARTITIONING)
         """.format(os.path.abspath(file_), table, ', '.join(fields))
 
     @transaction.commit_on_success

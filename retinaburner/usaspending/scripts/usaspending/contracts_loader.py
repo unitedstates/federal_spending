@@ -22,14 +22,13 @@ class Loader():
             DELIMITER '|' \
             CSV QUOTE '"' \
             NULL 'NULL' \
+            (PARTITIONING)
         """.format(os.path.abspath(file_), table, ', '.join(fields))
 
     @transaction.commit_on_success
     def insert_fpds(self, infile):
         sql = self.sql_str(infile)
-        print "got string"
         cursor = connection.cursor()
         cursor.execute(sql);
-        print "done executing"
 
 
