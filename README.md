@@ -103,6 +103,7 @@ manage.py load_grants FILENAME
 Same deal as the contracts except you use it for grants files.
 
 
+
 create indexes 
 ./manage.py dbshell < retinaburner/usaspending/scripts/usaspending/grants_indexes.sql
 ./manage.py dbshell < retinaburner/usaspending/scripts/usaspending/contracts_indexes.sql
