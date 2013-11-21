@@ -15,7 +15,15 @@ class Command(BaseCommand):
         confirm = raw_input("This will delete all USASpending related tables, indexes, etc. Are you sure you want to proceed? y\\n ")
         if confirm != 'y':
             return
+ 
+        
 
+        a="""print "deleting out files"
+        OUTPATH = settings.CSV_PATH + 'out/'
+        for f in os.listdir(OUTPATH):
+            os.remove(OUTPATH + f)"""
+
+        
         print "deleting old tables and indexes"
         cursor = connection.cursor()
         sql = "Drop table if exists usaspending_contract cascade; commit; Drop table if exists usaspending_grant cascade; commit;"

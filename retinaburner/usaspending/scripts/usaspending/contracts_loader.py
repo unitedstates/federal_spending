@@ -2,6 +2,7 @@ from fpds import FIELDS, CALCULATED_FIELDS
 import os.path
 from django.db import connection
 from django.db import transaction
+import re
 
 class Loader():
     def fields(self):
@@ -15,6 +16,10 @@ class Loader():
         print self.sql_str(infile)
 
     def sql_template_postgres(self, file_, table, fields):
+        
+        fy = re.findall('\d{4}', file_)[0]
+        table = table + '_' + fy
+
         return """
             copy {1} \
             ({2}) \
@@ -22,7 +27,6 @@ class Loader():
             DELIMITER '|' \
             CSV QUOTE '"' \
             NULL 'NULL' \
-            (PARTITIONING)
         """.format(os.path.abspath(file_), table, ', '.join(fields))
 
     @transaction.commit_on_success
