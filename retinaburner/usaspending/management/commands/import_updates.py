@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
         OUTPATH = settings.CSV_PATH + 'out/'
 
-        a="""confirm = raw_input("Clearing out the csvs in the out folder, continue? y/n")
+        confirm = raw_input("Clearing out the csvs in the out folder, continue? y/n")
         if confirm != 'y': 
             return
 
@@ -60,7 +60,7 @@ class Command(BaseCommand):
             elif 'Delta' in fname and ('Grants' in fname or 'Loans' in fname or 'Insurance' in fname or 'Direct_Payments' in fname):
                 management.call_command('convert_usaspending_grants')
 
-"""
+
         print "Processing transaction updates in database"
         #print "Current number of rows in contract table: {0}".format(Contract.objects.all().count())
         #print "Current number of rows in grant table: {0}".format(Grant.objects.all().count())
