@@ -1,6 +1,7 @@
 from localflavor.us.models import USStateField
 from django.db import models
 import retinaburner.usaspending
+from django.db import connection
 
 
 class Contract(models.Model):
@@ -166,6 +167,10 @@ class Contract(models.Model):
     imported_on = models.DateField(auto_now_add=True)
 
 
+  #  def save(self, *args, **kwargs):
+        
+   #     cursor = connection.cursor()
+    #    cursor.execute(sql);
 
 RECORD_TYPES = (
     ('1', "County aggregate reporting"),
