@@ -1,4 +1,4 @@
-create text search dictionary retinaburner ( template = simple, stopwords = retinaburner );
-create text search configuration retinaburner ( copy = simple );
-alter text search configuration retinaburner alter mapping for asciiword with retinaburner;
+create text search dictionary usspending ( template = simple, stopwords = US_Spending );
+create text search configuration usspending ( copy = simple );
+alter text search configuration usspending alter mapping for asciiword with usspending;
 commit;
