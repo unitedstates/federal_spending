@@ -8,9 +8,9 @@ class Command(BaseCommand):
 
     @transaction.commit_on_success
     def handle(self, grant_path, **options):
-        print "Current number of rows in grant table: {0}".format(Grant.objects.all().count())
+        #print "Current number of rows in grant table: {0}".format(Grant.objects.all().count())
         
         Loader().insert_faads(grant_path)
-        transaction.set_dirty()
+        #transaction.set_dirty()
 
-        print "New number of rows in grant table: {0}".format(Grant.objects.all().count())
+        #print "New number of rows in grant table: {0}".format(Grant.objects.all().count())

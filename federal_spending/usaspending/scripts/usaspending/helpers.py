@@ -15,7 +15,7 @@ def correctionLateIndicator(value):
 
 
 def nullable(value):
-    if value == '':
+    if value == '' or value == 'null':
         return None
 
     return value
@@ -44,10 +44,8 @@ def nullable_int(value):
 def splitInt(value):
 
     if not value is None:
-        try:
-            return int(value)
-        except:
-            return int(value.split('.')[0])
+        value = float(value) #solve currency weirdness
+        value = int(value)
     else:
         return None
 

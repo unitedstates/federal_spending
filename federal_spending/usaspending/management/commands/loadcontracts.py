@@ -8,9 +8,9 @@ class Command(BaseCommand):
 
     @transaction.commit_on_success
     def handle(self, contracts_file, **options):
-        print "Current number of rows in contract table: {0}".format(Contract.objects.all().count())
+        #print "Current number of rows in contract table: {0}".format(Contract.objects.all().count())
 
         Loader().insert_fpds(contracts_file)
         #transaction.set_dirty()
 
-        print "New number of rows in contract table: {0}".format(Contract.objects.all().count())
+        #print "New number of rows in contract table: {0}".format(Contract.objects.all().count())
