@@ -5,11 +5,11 @@ An unofficial guide to the data in USASpending.gov and other spending data syste
 USASpending.gov is the public facing source for grants and contracts data over $25,000. However, this consitutes far less than 100% of government spending. 
 
 What USASpending does NOT include:
-* Salaries
-* Retirement and other benefits data
-* Certain costs related to the general operations of the government (building leases, etc)
-* Payments to individuals
-* Medicare/Medicaid Data
+*Salaries
+*Retirement and other benefits data
+*Certain costs related to the general operations of the government (building leases, etc)
+*Payments to individuals
+*Medicare/Medicaid Data
 
 
 
