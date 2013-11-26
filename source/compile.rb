@@ -26,7 +26,6 @@ twitter = settings['twitter']
 google_analytics = settings['google_analytics']
 
 header = '
-  <link rel="shortcut icon" type="image/ico" href="http://s3.amazonaws.com/assets.sunlightfoundation.com/brisket/1.0/images/favicon.ico">
   <link rel="stylesheet" type="text/css" href="documentup.css">
   <script type="text/javascript" src="//use.typekit.net/blp6kvr.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -69,7 +68,7 @@ files.each do |filename|
   # add in our own header (custom styles)
   content.sub! /<link.*?<\/head>/im, "#{header}\n</head>"
 
-  content.sub! "<body><div id=\"container\">", "<body><div class=\"sf-header\"><div class=\"container\"><a class=\"sf-logo\" href=\"http://www.sunlightfoundation.com\">Sunlight Foundation</a></div></div><div id=\"container\">"
+  content.sub! "<body><div id=\"container\">", "<body><div id=\"container\">"
 
   # add in our own footer (Google Analytics)
   content.sub! "</body>", "#{footer}\n</body>"
