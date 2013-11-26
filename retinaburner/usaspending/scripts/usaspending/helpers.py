@@ -44,7 +44,10 @@ def nullable_int(value):
 def splitInt(value):
 
     if not value is None:
-        return int(value.split('.')[0])
+        try:
+            return int(value)
+        except:
+            return int(value.split('.')[0])
     else:
         return None
 

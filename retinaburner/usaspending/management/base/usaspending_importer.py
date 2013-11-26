@@ -62,6 +62,8 @@ class BaseUSASpendingConverter(BaseImporter):
         def null_transform(value):
             return value
 
+        line_num = 0
+
         for line in reader:
             insert_fields = []
 
@@ -76,7 +78,7 @@ class BaseUSASpendingConverter(BaseImporter):
                     raise e
                 except Exception, e:
                     value = None
-                    self.log.error(u'|'.join([fieldname, line[fieldname], e.message]))
+                    self.log.error(u'|'.join([fieldname, line[fieldname], e.message, line_num]))
 
                 insert_fields.append(self.filter_non_values(fieldname, value, string_lengths))
 
@@ -96,6 +98,7 @@ class BaseUSASpendingConverter(BaseImporter):
                     insert_fields.append(self.filter_non_values(fieldname, value, string_lengths))
 
             writer.writerow(insert_fields)
+            line_num += 1
 
     def filter_non_values(self, field, value, string_lengths):
         # indicates that field should be treated as a CharField

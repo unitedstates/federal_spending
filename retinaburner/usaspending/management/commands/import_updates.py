@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 from django.core import management
 from django.conf import settings
 from django.db import connections, connection, transaction
-
+from django.db.models import sql
 from itertools import izip
 from dateutil.parser import parse
 import os
@@ -34,11 +34,12 @@ class Command(BaseCommand):
     grants_idx_drop = grants_idx[:3]
     grants_idx_add = grants_idx[5:8]
 
+    @transaction.commit_manually
     def handle(self, download_file='delta_downloads.txt', **options):
 
         OUTPATH = settings.CSV_PATH + 'out/'
 
-        confirm = raw_input("Clearing out the csvs in the out folder, continue? y/n")
+        a="""confirm = raw_input("Clearing out the csvs in the out folder, continue? y/n")
         if confirm != 'y': 
             return
 
@@ -64,7 +65,7 @@ class Command(BaseCommand):
         print "Processing transaction updates in database"
         #print "Current number of rows in contract table: {0}".format(Contract.objects.all().count())
         #print "Current number of rows in grant table: {0}".format(Grant.objects.all().count())
-
+"""
         c = connections['default'].cursor()
 
         print 'deleting unecessary indexes'
@@ -100,7 +101,9 @@ class Command(BaseCommand):
                 reader = csv.reader(open(OUTPATH + sname), delimiter='|')
                 for line in reader:
                     self.update_grant_row(line)
-                    if line_total % 1000 == 0: print "... on line {0}".format(line_total)
+                    if line_total % 1000 == 0: 
+                        print "... on line {0}".format(line_total)
+                        transaction.commit()
                     line_total += 1
 
         print 'recreating unecessary indexes'
