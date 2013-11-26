@@ -61,7 +61,6 @@ files.each do |filename|
   system "curl -X POST \
     --data-urlencode content@#{filename}.md \
     --data-urlencode name=\"#{name}\" \
-    --data-urlencode twitter=#{twitter} \
     --data-urlencode google_analytics=\"#{google_analytics}\" \
     \"http://documentup.com/compiled\" > #{output_file}"
 
