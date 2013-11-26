@@ -3,7 +3,6 @@ from us_spending.usaspending.scripts.usaspending.contracts_loader import Loader
 from django.core.management.base import BaseCommand
 from us_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
 from us_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
-
 from django.core import management
 from django.db import connection
 from django.conf import settings

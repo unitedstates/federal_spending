@@ -104,7 +104,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'us_spending.urls'
-
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'us_spending.wsgi.application'
 
@@ -121,7 +120,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'us_spending.usaspending'
+=======
+    'retinaburner.usaspending'
+>>>>>>> 15d6d8bf48aa06f611c2413233f1cb3e775fbc3f
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
