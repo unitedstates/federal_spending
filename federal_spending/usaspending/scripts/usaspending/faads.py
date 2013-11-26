@@ -1,6 +1,6 @@
 from helpers import splitCode, nullable, recovery_act, datestamp, \
         splitInt, correctionLateIndicator
-from us_spending.usaspending.models import Grant
+from federal_spending.usaspending.models import Grant
 
 
 FIELDS = [('unique_transaction_id', None),

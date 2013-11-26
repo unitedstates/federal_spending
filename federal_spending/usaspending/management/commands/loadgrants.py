@@ -1,5 +1,5 @@
-from us_spending.usaspending.models import Grant
-from us_spending.usaspending.scripts.usaspending.grants_loader import Loader
+from federal_spending.usaspending.models import Grant
+from federal_spending.usaspending.scripts.usaspending.grants_loader import Loader
 from django.core.management.base import BaseCommand
 from django.db import transaction
 

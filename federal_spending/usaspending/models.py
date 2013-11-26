@@ -1,6 +1,6 @@
 from localflavor.us.models import USStateField
 from django.db import models
-import us_spending.usaspending
+import federal_spending.usaspending
 from django.db import connection
 
 

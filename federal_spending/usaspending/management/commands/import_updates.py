@@ -1,7 +1,7 @@
-from us_spending.usaspending.models import Contract, Grant
-from us_spending.usaspending.scripts.usaspending.contracts_loader import Loader
-from us_spending.usaspending.scripts.usaspending.fpds import FIELDS as CONTRACT_FIELDS, CALCULATED_FIELDS as CONTRACT_CALCULATED_FIELDS
-from us_spending.usaspending.scripts.usaspending.faads import FIELDS as GRANT_FIELDS, CALCULATED_FIELDS as GRANT_CALCULATED_FIELDS
+from federal_spending.usaspending.models import Contract, Grant
+from federal_spending.usaspending.scripts.usaspending.contracts_loader import Loader
+from federal_spending.usaspending.scripts.usaspending.fpds import FIELDS as CONTRACT_FIELDS, CALCULATED_FIELDS as CONTRACT_CALCULATED_FIELDS
+from federal_spending.usaspending.scripts.usaspending.faads import FIELDS as GRANT_FIELDS, CALCULATED_FIELDS as GRANT_CALCULATED_FIELDS
 from django.core.management.base import BaseCommand
 from django.core import management
 from django.conf import settings
@@ -13,8 +13,8 @@ import os
 import csv
 import datetime
 import time
-from us_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
-from us_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
+from federal_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
+from federal_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
 
 def notnull(val):
     if val and val != '' and 'null' not in val.strip().lower():

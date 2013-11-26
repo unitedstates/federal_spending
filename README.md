@@ -1,4 +1,4 @@
-US Spending Data
+US Federal Spending Data
 =================================================
 
 Intro
@@ -37,7 +37,7 @@ After filling in your database settings in the Django settings file, run
     manage.py syncdb
 to create the tables.
 
-If you are using postgresql and will be using the indexes with this project, you will need to create some text search elements within postgresql. To do that, move the file in the root directory of the project (US_spending.stop) to your postgresql text search directory. On version 9.1, that is 
+If you are using postgresql and will be using the indexes with this project, you will need to create some text search elements within postgresql. To do that, move the file in the root directory of the project (federal_spending.stop) to your postgresql text search directory. On version 9.1, that is 
 /usr/share/postgresql/9.1/tsearchdata/ .
 
 Once you move the stopwords file, you can create the text search indexes like this: 
@@ -53,7 +53,7 @@ The download, cleaning and import processes are broken out into their own Django
 
 manage.py fresh_import
 
-This will automatically download the files in US_Spending/usaspending/downloads/all_downloads.txt process them and store them in the database. The default contents of that file are 14 years of fiscal data so just go in and remove some links if you don't need all of that.
+This will automatically download the files in federal_spending/usaspending/downloads/all_downloads.txt process them and store them in the database. The default contents of that file are 14 years of fiscal data so just go in and remove some links if you don't need all of that.
 
 Alternatively, if you want to run the commands individually, either to debug or just see how it works, you can. Here's the steps, each with their own manage command:
 
@@ -74,7 +74,7 @@ manage.py download_files FILENAME
 
 http://www.usaspending.gov/datafeeds/2013_All_Contracts_Full_20131015.csv.zip
 
-Which are available at http://www.usaspending.gov/data under the Archives tab. There is an example file in the US_Spending/usaspending/downloads folder. Here's an example of how to use the command with the example file included in the project:
+Which are available at http://www.usaspending.gov/data under the Archives tab. There is an example file in the federal_spending/usaspending/downloads folder. Here's an example of how to use the command with the example file included in the project:
 
     manage.py download_files downloads.20131105.txt
 
@@ -100,7 +100,7 @@ Use this command to generate partitions in the contract and grant tables for eac
 
 manage.py load_contracts FILENAME
 ----------------------------------
-Finally, use the Postgresql copy command to dump the csv into the tables. Note that this is not smart. It won't check for duplicate transactions. So you only want to use this when starting with empty tables. The FILENAME should be one of the files that appears in the out file (US_Spending/usaspending/downloads/csvs/out/contracts_2013.csv, for example).
+Finally, use the Postgresql copy command to dump the csv into the tables. Note that this is not smart. It won't check for duplicate transactions. So you only want to use this when starting with empty tables. The FILENAME should be one of the files that appears in the out file (federal_spending/usaspending/downloads/csvs/out/contracts_2013.csv, for example).
 
 
 manage.py load_grants FILENAME
@@ -110,8 +110,8 @@ Same deal as the contracts except you use it for grants files.
 
 
 create indexes 
-./manage.py dbshell < US_Spending/usaspending/scripts/usaspending/grants_indexes.sql
-./manage.py dbshell < US_Spending/usaspending/scripts/usaspending/contracts_indexes.sql
+./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/grants_indexes.sql
+./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/contracts_indexes.sql
 
 
 run tests to ensure import --> write tests, check against usaspending api

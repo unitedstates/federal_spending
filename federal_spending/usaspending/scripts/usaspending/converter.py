@@ -1,6 +1,6 @@
-from us_spending.usaspending.models import Contract
-from us_spending.usaspending.grants.models import Grant
-from us_spending.usaspending.management.base.importer import BaseImporter
+from federal_spending.usaspending.models import Contract
+from federal_spending.usaspending.grants.models import Grant
+from federal_spending.usaspending.management.base.importer import BaseImporter
 from django.db.models.fields import CharField
 import csv
 import faads

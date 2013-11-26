@@ -1,7 +1,7 @@
 from django.core.management.base import CommandError, BaseCommand
 from django.db import connections, transaction
 from django.conf import settings
-from us_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
+from federal_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
 
 
 contracts_idx = [

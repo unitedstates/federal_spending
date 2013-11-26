@@ -4,7 +4,7 @@ import fnmatch
 import time
 import datetime
 
-from us_spending.usaspending.utils.log import set_up_logger
+from federal_spending.usaspending.utils.log import set_up_logger
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
 from django.conf import settings

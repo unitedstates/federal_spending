@@ -1,6 +1,6 @@
-from us_spending.usaspending.management.base.usaspending_importer import BaseUSASpendingConverter
-from us_spending.usaspending.models import Contract
-from us_spending.usaspending.scripts.usaspending import fpds
+from federal_spending.usaspending.management.base.usaspending_importer import BaseUSASpendingConverter
+from federal_spending.usaspending.models import Contract
+from federal_spending.usaspending.scripts.usaspending import fpds
 
 
 class Command(BaseUSASpendingConverter):

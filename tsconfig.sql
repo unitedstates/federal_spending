@@ -1,4 +1,4 @@
-create text search dictionary us_spending ( template = simple, stopwords = US_Spending );
-create text search configuration us_spending ( copy = simple );
-alter text search configuration us_spending alter mapping for asciiword with us_spending;
+create text search dictionary federal_spending ( template = simple, stopwords = federal_spending );
+create text search configuration federal_spending ( copy = simple );
+alter text search configuration federal_spending alter mapping for asciiword with federal_spending;
 commit;

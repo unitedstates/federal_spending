@@ -2,7 +2,7 @@ from helpers import nullable_float, splitCode, transformFlag, nullable, \
         nullable_int, agency_name_lookup, recovery_act, datestamp, \
         first_char
 
-from us_spending.usaspending.models import Contract
+from federal_spending.usaspending.models import Contract
 
 FIELDS = [
 ('unique_transaction_id', None),

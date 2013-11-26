@@ -1,8 +1,8 @@
-from us_spending.usaspending.models import Contract, Grant
-from us_spending.usaspending.scripts.usaspending.contracts_loader import Loader
+from federal_spending.usaspending.models import Contract, Grant
+from federal_spending.usaspending.scripts.usaspending.contracts_loader import Loader
 from django.core.management.base import BaseCommand
-from us_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
-from us_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
+from federal_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
+from federal_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
 from django.core import management
 from django.db import connection
 from django.conf import settings
@@ -28,11 +28,11 @@ class Command(BaseCommand):
         confirm = raw_input(warn_text)
         if confirm != 'y':
             return
-
+        a="""
         print "deleting out files"
         OUTPATH = settings.CSV_PATH + 'out/'
         for f in os.listdir(OUTPATH):
-            os.remove(OUTPATH + f)
+            os.remove(OUTPATH + f)"""
 
         
         print "deleting old tables and indexes"
@@ -63,6 +63,7 @@ class Command(BaseCommand):
         else:
             management.call_command('create_partition', fiscal_year='all')
 
+        a="""
         print "Downloading links in {0}".format(import_file) 
         management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/' + import_file)
 
@@ -70,7 +71,7 @@ class Command(BaseCommand):
         time.sleep(60)
 
         print "processing downloaded files into proper format"
-        management.call_command('convert_usaspending_contracts', '--traceback')
+        management.call_command('convert_usaspending_contracts', '--traceback')"""
         management.call_command('convert_usaspending_grants', '--traceback')
 
         print "Putting processed Contract CSVs in database"

@@ -1,6 +1,6 @@
-from us_spending.usaspending.management.base.usaspending_importer import BaseUSASpendingConverter
-from us_spending.usaspending.models import Grant
-from us_spending.usaspending.scripts.usaspending import faads
+from federal_spending.usaspending.management.base.usaspending_importer import BaseUSASpendingConverter
+from federal_spending.usaspending.models import Grant
+from federal_spending.usaspending.scripts.usaspending import faads
 
 
 class Command(BaseUSASpendingConverter):

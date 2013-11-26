@@ -1,6 +1,6 @@
-from us_spending.usaspending.management.base.importer import BaseImporter
+from federal_spending.usaspending.management.base.importer import BaseImporter
 from django.db.models.fields import CharField
-from us_spending.usaspending.utils.ucsv import UnicodeDictReader, UnicodeWriter
+from federal_spending.usaspending.utils.ucsv import UnicodeDictReader, UnicodeWriter
 from django.conf import settings
 import os.path
 import re
@@ -78,7 +78,7 @@ class BaseUSASpendingConverter(BaseImporter):
                     raise e
                 except Exception, e:
                     value = None
-                    self.log.error(u'|'.join([fieldname, line[fieldname], e.message, line_num]))
+                    self.log.error(u'|'.join([fieldname, line[fieldname], e.message, str(line_num)]))
 
                 insert_fields.append(self.filter_non_values(fieldname, value, string_lengths))
 
