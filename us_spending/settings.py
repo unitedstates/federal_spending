@@ -120,11 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'us_spending.usaspending'
-=======
-    'retinaburner.usaspending'
->>>>>>> 15d6d8bf48aa06f611c2413233f1cb3e775fbc3f
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
