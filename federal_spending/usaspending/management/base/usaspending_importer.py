@@ -44,7 +44,7 @@ class BaseUSASpendingConverter(BaseImporter):
 
         self.parse_file(file_path, outfile_path, self.module.FIELDS, self.get_string_fields(), self.module.CALCULATED_FIELDS)
 
-        self.archive_file(file_path, True)
+        #self.archive_file(file_path, True)
 
         self.log.info("Done.")
 

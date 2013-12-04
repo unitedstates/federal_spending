@@ -43,9 +43,10 @@ def nullable_int(value):
 
 def splitInt(value):
 
-    if not value is None:
+    if value:
         value = float(value) #solve currency weirdness
         value = int(value)
+        return value
     else:
         return None
 

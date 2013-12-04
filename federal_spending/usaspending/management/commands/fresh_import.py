@@ -62,12 +62,12 @@ class Command(BaseCommand):
                 management.call_command('create_partition', fiscal_year=fy, table='usaspending_grant')
         else:
             management.call_command('create_partition', fiscal_year='all')
-        a="""
+
         print "Downloading links in {0}".format(import_file) 
         management.call_command('download_files', settings.PROJECT_ROOT + '/usaspending/downloads/' + import_file)
 
         print "sleeping for a minute to allow files to close out"
-        time.sleep(60)"""
+        time.sleep(60)
 
         print "processing downloaded files into proper format"
         management.call_command('convert_usaspending_contracts', '--traceback')
