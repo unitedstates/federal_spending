@@ -1,0 +1,412 @@
+- piid:
+    prefix: AID
+    name: Agency for International Development
+    prefix_required: true
+    department_id: '1152'
+
+- piid:
+    prefix: AFRH
+    name: Armed Forces Retirement Home
+    prefix_required: true
+    department_id: '8400'
+
+- piid:
+    prefix: BB
+    name: Broadcasting Board of Governors
+    prefix_required: true
+    department_id: '9568'
+
+- piid:
+    prefix: CF
+    name: Commodity Futures Trading Commission
+    prefix_required: true
+    department_id: '9507'
+
+- piid:
+    prefix: CPSC
+    name: Consumer Product Safety Commission
+    prefix_required: true
+    department_id: '6100'
+
+- piid:
+    prefix: CFP
+    name: Consumer Financial Protection Bureau
+    prefix_required: true
+    department_id: '955F'
+
+- piid: 
+    prefix: CNS 
+    name: Corporation for National and Community Service
+    prefix_required: true
+    department_id: '9577'
+
+- piid: 
+    prefix: CSOSA
+    name: Court Services and Offender Supervision Agency
+    prefix_required: true
+    department_id: '9594'
+
+- piid:
+    prefix: PSA
+    name: Court Services and Offender Supervision Agency/Pretrial Services Agency
+    prefix_required: true
+    department_id: '959P'
+
+- piid:
+    prefix: AG
+    name: Department of Agriculture
+    prefix_required: true
+    department_id: '1200'
+
+- piid:
+    prefix: DOC
+    name: Department of Commerce
+    prefix_required: true
+    department_id: '1300'
+
+- piid: 
+    prefix: ED
+    name: Department of Education
+    prefix_required: true
+    department_id: '9100'
+
+- piid:
+    prefix: DE
+    name: Department of Energy
+    prefix_required: true
+    department_id: '8900'
+
+- piid: 
+    prefix: HS
+    name: Department of Homeland Security
+    prefix_required: true
+    department_id: '7000'
+
+- piid: 
+    prefix: IN 
+    name: Department of Interior
+    prefix_required: true
+    department_id: '1400'
+
+- piid:
+    prefix: DJ
+    name: Department of Justice
+    prefix_required: true
+    department_id: '1500'
+
+- piid:
+    prefix: DOL
+    name: Department of Labor
+    prefix_required: true
+    department_id: '1600'
+
+- piid: 
+    prefix: S 
+    name: Department of State
+    prefix_required: true
+    department_id: '1900'
+
+- piid: 
+    prefix: T
+    name: Department of Treasury
+    prefix_required: true
+    department_id: '2000'
+
+- piid: 
+    prefix: EP
+    name: Environmental Protection Agency
+    prefix_required: true
+    department_id: '6800'
+
+- piid: 
+    prefix: EEC
+    name: Equal Employment Opportunity Commission
+    prefix_required: true
+    department_id: '4500'
+
+- piid: 
+    prefix: FCC
+    name: Federal Communications Commission
+    prefix_required: true
+    department_id: '2700'
+
+- piid: 
+    prefix: FHF
+    name: Federal Housing Finance Agency
+    prefix_required: true
+    department_id: '9542'
+
+- piid:
+    prefix: FLRA
+    name: Federal Labor Relations Authority
+    prefix_required: true
+    department_id: '5400'
+
+- piid: 
+    prefix: FE 
+    name: Federal Elections Commission
+    prefix_required: true
+    department_id: '9506'
+
+- piid: 
+    prefix: FMC
+    name: Federal Maritime Commission
+    prefix_required: false
+    department_id: '6500'
+
+- piid: 
+    prefix: FERC
+    name: Federal Energy Regulatory Commission
+    prefix_required: true
+    department_id: '8961'
+
+- piid: 
+    prefix: FTC
+    name: Federal Trade Commission
+    prefix_required: true
+    department_id: '2900'
+
+- piid:
+    prefix: FMCS
+    name: Federal Mediation and Conciliation Service
+    prefix_required: true
+    department_id: '9300'
+
+- piid:
+    prefix: GS 
+    name: General Services Administration
+    prefix_required: true
+    department_id: '4700'
+
+- piid:
+    prefix: HHS
+    name: Health and Human Services
+    prefix_required: true
+    department_id: '7500'
+
+- piid: 
+    prefix: DU
+    name: Department of Housing and Urban Development
+    prefix_required: true
+    department_id: '8600'
+
+- piid: 
+    prefix: IMLS
+    name: Institute of Museum and Library Services
+    parent_department_id: '5900'
+    prefix_required: true
+    department_id:'5950'
+
+- piid: 
+    prefix: IBM
+    name: International Boundary and Water Commission: U.S. - Mexico
+    parent_department_id: '1900'
+    parent_prefix: 'S'
+    prefix_required: true
+    department_id: '19BM'
+
+- piid: 
+    prefix: ITC
+    name: International Trade Commission
+    prefix_required: true
+    department_id: '3400'
+
+- piid: 
+    prefix: JFKC
+    name: J. F. Kennedy Center for the Performing Arts
+    prefix_required: true
+    department_id: '3352'
+
+- piid: 
+    prefix: NN 
+    name: National Aeronautics and Space Administration
+    prefix_required: true
+    department_id: '8000'
+
+- piid:
+    prefix: NAMA
+    name: National Archives and Records Administration
+    prefix_required: true
+    department_id: '8800'
+
+- piid:
+    prefix: NEA
+    name: National Endowment for the Arts
+    prefix_required: true
+    department_id: '5920'
+
+- piid: 
+    prefix: NEH
+    name: National Endowment for the Humanities
+    prefix_required: true
+    department_id: '5940'
+
+- piid: 
+    prefix: NLR
+    name: National Labor Relations Board
+    prefix_required: true
+    department_id: '6300'
+
+- piid: 
+    prefix: NSF
+    name: National Science Foundation
+    prefix_required: true
+    department_id: '4900'
+
+- piid: 
+    prefix: NTSB
+    name: National Transportation Safety Board
+    prefix_required: true
+    department_id: '9508'
+
+- piid: 
+    prefix: OPM
+    name: Office of Personnel Management
+    prefix_required: true
+    department_id: '2400'
+
+- piid: 
+    prefix: OSC
+    name: Office of Special Counsel
+    prefix_required: true
+    department_id: '6201'
+
+- piid: 
+    prefix: OPI 
+    name: Overseas Private Investment Corporation
+    prefix_required: true
+    department_id: '7100'
+
+- piid:
+    prefix: PC 
+    name: Peace Corps
+    prefix_required: true
+    department_id: '1145'
+
+- piid:
+    prefix: PBGC01
+    name: Pension Benefit Guaranty Corporation
+    parent_prefix: DOL
+    parent_department_id: '1600'
+    prefix_required: true
+    department_id: '1665'
+
+- piid:
+    prefix: RRB
+    name: Railroad Retirement Board
+    prefix_required: true
+    department_id: '6000'
+
+- piid: 
+    prefix: RA
+    name: Recovery Accountability and Transparency Board
+    prefix_required: true
+    department_id: '9561'
+
+- piid:
+    prefix: SEC
+    name: Securities and Exchange Commission
+    prefix_required: true
+    department_id: '5000'
+
+- piid: 
+    prefix: SBA
+    name: Small Business Administration
+    prefix_required: true
+    department_id: '7300'
+
+- piid:
+    prefix: F
+    name: Smithsonian Institution 
+    prefix_required: true
+    department_id: '3300'
+
+- piid:
+    prefix: SS
+    name: Social Security Administration
+    prefix_required: true
+    department_id: '2800'
+
+- piid:
+    prefix: DT
+    name: Department of Transportation
+    prefix_required: true
+    department_id: '6900'
+
+- piid: 
+    prefix: CIG
+    name: Council of the Inspectors General on Integrity and Efficiency
+    prefix_required: true
+
+- piid: 
+    prefix: NRC
+    name: Nuclear Regulatory Commission
+    prefix_required: true
+    department_id: '3100'
+
+- piid: 
+    prefix: TDA
+    name: United States Trade and Development Agency
+    prefix_required: true
+    department_id: '1153'
+
+- piid:
+    prefix: V
+    name: Department of Veterans Affairs
+    prefix_required: true
+    department_id: '3600'
+
+- piid:
+    name: American Battle Monuments Commission
+    prefix_required: false
+    department_id: '7400'
+
+- piid:
+    name: Commission on Civil Rights
+    prefix_required: false
+    department_id: '9517'
+
+- piid: 
+    name: Committee for Purchase from People who are Blind and Severely Disabled
+    prefix_required: false
+    department_id: '9518'
+
+- piid:
+    name: Defense Nuclear Facilities Safety Board
+    prefix_required: false
+    department_id: '9516'
+
+- piid: 
+    name: Executive Office of the President
+    prefix_required: false
+    department_id: '1100'
+
+- piid: 
+    name: Library of Congress
+    prefix_required: false
+    department_id: '0300'
+
+- piid:
+    name: Merit Systems Protection Board
+    prefix_required: false
+    department_id: '4100'
+
+- piid: 
+    name: National Commission on Libraries and Information Science
+    prefix_required: false
+    department_id: '9527'
+
+- piid: 
+    name: National Gallery of Art 
+    prefix_required: false
+    department_id: '3355'
+
+- piid: 
+    name: National Mediation Board
+    prefix_required: false
+    department_id: '9524'
+
+- piid: 
+    name: United States Holocaust Museum
+    prefix_required: false
+    department_id: '9531'
