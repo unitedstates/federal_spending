@@ -46,6 +46,13 @@ manage.py dbshell < tsconfig.sql
 
 tsconfig.sql is also located in the project's root directory. This is a one time step that only needs to be repeated if you blow away your whole database, not just the tables. 
 
+#create empty directories for the processing of CSVS in usaspending/downloads/csvs
+# usaspending/downloads/csvs/out
+# usaspending/downloads/csvs/done
+# usaspending/downloads/csvs/rejected
+# usaspending/downloads/csvs/dailies
+
+
 Importing Contracts and Grants
 ------------------------------
 
@@ -109,9 +116,11 @@ Same deal as the contracts except you use it for grants files.
 
 
 
-create indexes 
-./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/grants_indexes.sql
-./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/contracts_indexes.sql
+manage.py create_indexes
+------------------------------- 
 
+./manage.py create_indexes
+
+That's it!
 
 run tests to ensure import --> write tests, check against usaspending api
