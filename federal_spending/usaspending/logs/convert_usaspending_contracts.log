@@ -1,0 +1,17 @@
+2014-01-13 11:53:20,151 - convert_usaspending_contracts - INFO - Starting Command
+2014-01-13 11:53:20,151 - convert_usaspending_contracts - INFO - Found file 2013_All_Contracts_Delta_20131219.csv
+2014-01-13 11:53:20,151 - convert_usaspending_contracts - INFO - Starting...
+2014-01-13 11:53:29,868 - convert_usaspending_contracts - DEBUG - value '0819- 02272 EL DORADO' for field 'zipcode' is too long.
+2014-01-13 11:53:45,964 - convert_usaspending_contracts - DEBUG - value '0819- 02272 EL DORADO' for field 'zipcode' is too long.
+2014-01-13 11:53:50,123 - convert_usaspending_contracts - DEBUG - value '0819- 02272 EL DORADO' for field 'zipcode' is too long.
+2014-01-13 11:53:53,667 - convert_usaspending_contracts - DEBUG - value '0819- 02272 EL DORADO' for field 'zipcode' is too long.
+2014-01-13 11:53:56,105 - convert_usaspending_contracts - INFO - Done.
+2014-01-13 11:53:56,105 - convert_usaspending_contracts - INFO - Found file 2014_All_Contracts_Delta_20131219.csv
+2014-01-13 11:53:56,106 - convert_usaspending_contracts - INFO - Starting...
+2014-01-13 11:54:35,896 - convert_usaspending_contracts - DEBUG - value 'P.O BOX 5175, AMMAN 11183' for field 'zipcode' is too long.
+2014-01-13 11:54:53,202 - convert_usaspending_contracts - INFO - Done.
+2014-01-13 11:54:53,202 - convert_usaspending_contracts - INFO - Found file 2014_All_Grants_Delta_20131219.csv
+2014-01-13 11:54:53,202 - convert_usaspending_contracts - INFO - Doesn't match file pattern for this importer. Skipping.
+2014-01-13 11:54:53,202 - convert_usaspending_contracts - INFO - Found file 2013_All_Grants_Delta_20131219.csv
+2014-01-13 11:54:53,202 - convert_usaspending_contracts - INFO - Doesn't match file pattern for this importer. Skipping.
+2014-01-13 11:54:53,203 - convert_usaspending_contracts - INFO - Finished.

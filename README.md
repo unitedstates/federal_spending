@@ -42,7 +42,7 @@ If you are using postgresql and will be using the indexes with this project, you
 
 Once you move the stopwords file, you can create the text search indexes like this: 
 
-manage.py dbshell > tsconfig.sql  
+manage.py dbshell < tsconfig.sql  
 
 tsconfig.sql is also located in the project's root directory. This is a one time step that only needs to be repeated if you blow away your whole database, not just the tables. 
 
