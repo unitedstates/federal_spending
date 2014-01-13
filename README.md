@@ -62,8 +62,8 @@ Alternatively, if you want to run the commands individually, either to debug or 
 *   manage.py convert_usaspending_grants     # ditto, but for grants
 *   manage.py syncdb  #create tables
 *   manage.py create_partition --fiscal-year all  #create postgresql partitions
-*   manage.py load_contracts FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
-*   manage.py load_grants FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table 
+*   manage.py loadcontracts FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
+*   manage.py loadgrants FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table 
 *   manage.py build_indexes  -- Not implemented
 
 
@@ -98,12 +98,12 @@ manage.py create_partition --fiscal-year all
 --------------------------------------------
 Use this command to generate partitions in the contract and grant tables for each fiscal year. This helps with indexing and performance. Either pass in a desired fiscal year, or just pass in all to do all the years in the FISCAL_YEARS setting.
 
-manage.py load_contracts FILENAME
+manage.py loadcontracts FILENAME
 ----------------------------------
 Finally, use the Postgresql copy command to dump the csv into the tables. Note that this is not smart. It won't check for duplicate transactions. So you only want to use this when starting with empty tables. The FILENAME should be one of the files that appears in the out file (federal_spending/usaspending/downloads/csvs/out/contracts_2013.csv, for example).
 
 
-manage.py load_grants FILENAME
+manage.py loadgrants FILENAME
 -------------------------------
 Same deal as the contracts except you use it for grants files.
 
