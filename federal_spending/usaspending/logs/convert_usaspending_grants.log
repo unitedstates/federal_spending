@@ -1,0 +1,12 @@
+2014-01-13 11:56:28,503 - convert_usaspending_grants - INFO - Starting Command
+2014-01-13 11:56:28,503 - convert_usaspending_grants - INFO - Found file 2013_All_Contracts_Delta_20131219.csv
+2014-01-13 11:56:28,503 - convert_usaspending_grants - INFO - Doesn't match file pattern for this importer. Skipping.
+2014-01-13 11:56:28,504 - convert_usaspending_grants - INFO - Found file 2014_All_Contracts_Delta_20131219.csv
+2014-01-13 11:56:28,504 - convert_usaspending_grants - INFO - Doesn't match file pattern for this importer. Skipping.
+2014-01-13 11:56:28,504 - convert_usaspending_grants - INFO - Found file 2014_All_Grants_Delta_20131219.csv
+2014-01-13 11:56:28,504 - convert_usaspending_grants - INFO - Starting...
+2014-01-13 11:56:35,385 - convert_usaspending_grants - INFO - Done.
+2014-01-13 11:56:35,385 - convert_usaspending_grants - INFO - Found file 2013_All_Grants_Delta_20131219.csv
+2014-01-13 11:56:35,385 - convert_usaspending_grants - INFO - Starting...
+2014-01-13 11:56:37,484 - convert_usaspending_grants - INFO - Done.
+2014-01-13 11:56:37,484 - convert_usaspending_grants - INFO - Finished.

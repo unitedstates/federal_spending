@@ -42,9 +42,16 @@ If you are using postgresql and will be using the indexes with this project, you
 
 Once you move the stopwords file, you can create the text search indexes like this: 
 
-manage.py dbshell > tsconfig.sql  
+manage.py dbshell < tsconfig.sql  
 
 tsconfig.sql is also located in the project's root directory. This is a one time step that only needs to be repeated if you blow away your whole database, not just the tables. 
+
+#create empty directories for the processing of CSVS in usaspending/downloads/csvs
+# usaspending/downloads/csvs/out
+# usaspending/downloads/csvs/done
+# usaspending/downloads/csvs/rejected
+# usaspending/downloads/csvs/dailies
+
 
 Importing Contracts and Grants
 ------------------------------
@@ -62,8 +69,8 @@ Alternatively, if you want to run the commands individually, either to debug or 
 *   manage.py convert_usaspending_grants     # ditto, but for grants
 *   manage.py syncdb  #create tables
 *   manage.py create_partition --fiscal-year all  #create postgresql partitions
-*   manage.py load_contracts FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
-*   manage.py load_grants FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table 
+*   manage.py loadcontracts FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
+*   manage.py loadgrants FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table 
 *   manage.py build_indexes  -- Not implemented
 
 
@@ -98,20 +105,22 @@ manage.py create_partition --fiscal-year all
 --------------------------------------------
 Use this command to generate partitions in the contract and grant tables for each fiscal year. This helps with indexing and performance. Either pass in a desired fiscal year, or just pass in all to do all the years in the FISCAL_YEARS setting.
 
-manage.py load_contracts FILENAME
+manage.py loadcontracts FILENAME
 ----------------------------------
 Finally, use the Postgresql copy command to dump the csv into the tables. Note that this is not smart. It won't check for duplicate transactions. So you only want to use this when starting with empty tables. The FILENAME should be one of the files that appears in the out file (federal_spending/usaspending/downloads/csvs/out/contracts_2013.csv, for example).
 
 
-manage.py load_grants FILENAME
+manage.py loadgrants FILENAME
 -------------------------------
 Same deal as the contracts except you use it for grants files.
 
 
 
-create indexes 
-./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/grants_indexes.sql
-./manage.py dbshell < federal_spending/usaspending/scripts/usaspending/contracts_indexes.sql
+manage.py create_indexes
+------------------------------- 
 
+./manage.py create_indexes
+
+That's it!
 
 run tests to ensure import --> write tests, check against usaspending api
