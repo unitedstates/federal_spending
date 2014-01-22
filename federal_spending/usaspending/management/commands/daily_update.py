@@ -3,6 +3,8 @@ from federal_spending.usaspending.scripts.usaspending.fpds import FIELDS as CONT
 from federal_spending.usaspending.scripts.usaspending.faads import FIELDS as GRANT_FIELDS, CALCULATED_FIELDS as GRANT_CALCULATED_FIELDS
 from django.db import connections, transaction
 from federal_spending.usaspending.models import Contract, Grant
+from federal_spending.usaspending.management.commands.create_indexes import contracts_idx, grants_idx
+from federal_spending.usaspending.scripts.usaspending.config import INDEX_COLS_BY_TABLE
 from django.core import management
 from django.conf import settings
 import datetime
@@ -10,6 +12,7 @@ import requests
 import cStringIO
 import csv
 import os
+import sys
 import time
 from itertools import izip
 from dateutil.parser import parse
@@ -18,19 +21,35 @@ class Command(BaseCommand):
     
     ALL_CONTRACT_FIELDS = [ x[0] for x in CONTRACT_FIELDS ] + [ x[0] for x in CONTRACT_CALCULATED_FIELDS ]
     ALL_GRANT_FIELDS = [ x[0] for x in GRANT_FIELDS ] + [ x[0] for x in GRANT_CALCULATED_FIELDS ]
-    
+ 
+    contracts_idx_drop = contracts_idx[:10]
+    contracts_idx_add = contracts_idx[12:22]
+    grants_idx_drop = grants_idx[:3]
+    grants_idx_add = grants_idx[5:8]
+
+   
     def notnull(self, val):
         if val and val != '' and 'null' not in val.strip().lower():
             return True
         return False
     
     def handle(self, day=None, type='all', *args, **kwargs):
-
-
+        a="""print 'deleting unecessary indexes'
+        c = connections['default'].cursor()
+        for x in self.contracts_idx_drop:
+            print x
+            c.execute(x)
+        for x in self.grants_idx_drop:
+            print x
+            c.execute(x)
+        
+        print "deleting files in /datafeeds and /out"
+        """
         OUTPATH = settings.CSV_PATH + 'out/'
+        a="""
         for f in os.listdir(OUTPATH):
             os.remove(OUTPATH + f)
-        print "deleting old daily files"
+        
         INPATH = settings.CSV_PATH + 'datafeeds/'
         for f in os.listdir(INPATH):
             os.remove(INPATH + f)
@@ -73,27 +92,38 @@ class Command(BaseCommand):
         print "processing downloaded files into proper format"
         management.call_command('convert_usaspending_contracts')
         management.call_command('convert_usaspending_grants')
-
-
+"""
+        print "looping through files"
         for sname in os.listdir(OUTPATH):
-            line_total = 0
-            if 'contracts' in sname:
-                print "processing file {0}".format(sname)
-                reader = csv.reader(open(OUTPATH + sname), delimiter='|')
-                for line in reader:
-                    self.update_contract_row(line)
-                    if line_total % 1000 == 0: print "... on line {0}".format(line_total)
-                    line_total += 1
+            print sname
+            #if 'contracts' in sname:
+             #   self.process_contract_file(sname, OUTPATH)
 
             if 'grants' in sname:   
-                print "processing file {0}".format(sname)
-                reader = csv.reader(open(OUTPATH + sname), delimiter='|')
-                for line in reader:
-                    self.update_grant_row(line)
-                    if line_total % 1000 == 0: 
-                        print "... on line {0}".format(line_total)
-                    line_total += 1
+                self.process_grant_file(sname, OUTPATH)
 
+
+    @transaction.commit_on_success
+    def process_contract_file(self, sname, OUTPATH):
+        print "it's a contract file"
+        print "processing file {0}".format(sname)
+        line_total = 0
+        reader = csv.reader(open(OUTPATH + sname), delimiter='|')
+        for line in reader:
+            self.update_contract_row(line)
+            if line_total % 1000 == 0: print "... on line {0}".format(line_total)
+            line_total += 1
+
+    @transaction.commit_on_success
+    def process_grant_file(self, sname, OUTPATH):
+        print "it's a grant file"
+        print "processing file {0}".format(sname)
+        line_total = 0
+        reader = csv.reader(open(OUTPATH + sname), delimiter='|')
+        for line in reader:
+            self.update_grant_row(line)
+            if line_total % 1000 == 0: print "... on line {0}".format(line_total)
+            line_total += 1
 
     def check_fiscal_year(self, line, num):
         if len(line) >= (num):
@@ -125,9 +155,11 @@ class Command(BaseCommand):
                 return
             try:
                 c = Contract.objects.get(unique_transaction_id=line[0], fiscal_year=line[97])
+                return
             except Contract.DoesNotExist as e:
                 c = Contract(unique_transaction_id=line[0], fiscal_year=line[97])
             except Contract.MultipleObjectsReturned as e:
+                return # get rid of
                 # delete extra objects
                 cset = Contract.objects.filter(unique_transaction_id=line[0], fiscal_year=line[97]).order_by('-id')
                 for i, obj in enumerate(cset):
@@ -190,7 +222,6 @@ class Command(BaseCommand):
                         c = obj
                     else:
                         obj.delete()
-            #print connection.queries[-1]
 
             for (i, (column_name, value)) in enumerate(izip(self.ALL_GRANT_FIELDS, line)):
                 if i in [21, 22, 23, 55]:
@@ -207,13 +238,6 @@ class Command(BaseCommand):
 
                 setattr(c, column_name, value)
             c.save()
-            #print connection.queries[-1]
-
-        #&spending_category=Contracts
-        #&spending_category=Grants
-        #&fiscal_year=2014
-        #&fiscal_year=2014
-        #&since=2014-01-07
 
         # clear out dailies dir
         # for each FY, download the csv

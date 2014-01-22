@@ -13,12 +13,14 @@ INDEX_COLS_BY_TABLE = {
         'using gin (to_tsvector(\'federal_spending\'::regconfig, vendorname::text))',
         'fiscal_year',
         'unique_transaction_id',
+        'id'
     ],
     'usaspending_grant': [
         'using gin (to_tsvector(\'federal_spending\'::regconfig, agency_name::text)) ',
         'using gin (to_tsvector(\'federal_spending\'::regconfig, recipient_name::text))',
         'total_funding_amount',
         'unique_transaction_id',
-        'fiscal_year'
+        'fiscal_year',
+        'id'
     ],
 }

@@ -3,8 +3,20 @@ from django.db import models
 import federal_spending.usaspending
 from django.db import connection
 
+class ContractManager(models.Manager):
+    def get_table_for(self, fiscal_year):
+        table = 'usaspending_contract_{0}'.format(fiscal_year)
+        return table
+
+    def in_fiscal_year(self, fiscal_year):
+        self.fiscal_year = fiscal_year
+        self.model._meta.db_table = self.get_table_for(fiscal_year)
+        return self
 
 class Contract(models.Model):
+
+    objects = ContractManager()
+
     unique_transaction_id = models.CharField(max_length=32)
     transaction_status = models.CharField(max_length=32, blank=True)
     obligatedamount = models.DecimalField(default=0, max_digits=20, decimal_places=2, blank=True, null=True)
@@ -166,11 +178,13 @@ class Contract(models.Model):
     requesting_agency_name = models.CharField(max_length=255, blank=True)
     imported_on = models.DateField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        Contract.objects.in_fiscal_year(self.fiscal_year)
+        super(Contract, self).save()
 
-  #  def save(self, *args, **kwargs):
-        
-   #     cursor = connection.cursor()
-    #    cursor.execute(sql);
+    def delete(self, *args, **kwargs):
+        Contract.objects.in_fiscal_year(self.fiscal_year)
+        super(Contract, self).delete()
 
 RECORD_TYPES = (
     ('1', "County aggregate reporting"),
@@ -284,8 +298,21 @@ AGENCY_CATEGORIES = (
     ('ot', ''),
 )
 
+class GrantManager(models.Manager):
+    def get_table_for(self, fiscal_year):
+        table = 'usaspending_grant_{0}'.format(fiscal_year)
+        return table
+
+    def in_fiscal_year(self, fiscal_year):
+        self.fiscal_year = fiscal_year
+        self.model._meta.db_table = self.get_table_for(fiscal_year)
+        return self
+
 
 class Grant(models.Model):
+
+    objects = GrantManager()
+
     imported_on = models.DateField(auto_now_add=True)
     fiscal_year = models.IntegerField()
     record_type = models.CharField(max_length=1, blank=True, choices=RECORD_TYPES)
@@ -343,6 +370,15 @@ class Grant(models.Model):
     transaction_status = models.CharField(max_length=32, blank=True)
     unique_transaction_id = models.CharField(max_length=32)
     
+    
+    def save(self, *args, **kwargs):
+        Grant.objects.in_fiscal_year(self.fiscal_year)
+        super(Grant, self).save()
+
+    def delete(self, *args, **kwargs):
+        Grantt.objects.in_fiscal_year(self.fiscal_year)
+        super(Grant, self).delete()
+
     class Meta:
         ordering = ('fiscal_year','id')
     
