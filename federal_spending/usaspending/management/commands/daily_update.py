@@ -32,7 +32,7 @@ class Command(BaseCommand):
         if val and val != '' and 'null' not in val.strip().lower():
             return True
         return False
-    
+   
     def handle(self, day=None, type='all', *args, **kwargs):
         a="""print 'deleting unecessary indexes'
         c = connections['default'].cursor()
@@ -42,11 +42,11 @@ class Command(BaseCommand):
         for x in self.grants_idx_drop:
             print x
             c.execute(x)
-        
-        print "deleting files in /datafeeds and /out"
         """
+        print "deleting files in /datafeeds and /out"
+        
         OUTPATH = settings.CSV_PATH + 'out/'
-        a="""
+        
         for f in os.listdir(OUTPATH):
             os.remove(OUTPATH + f)
         
@@ -92,12 +92,12 @@ class Command(BaseCommand):
         print "processing downloaded files into proper format"
         management.call_command('convert_usaspending_contracts')
         management.call_command('convert_usaspending_grants')
-"""
+
         print "looping through files"
         for sname in os.listdir(OUTPATH):
             print sname
-            #if 'contracts' in sname:
-             #   self.process_contract_file(sname, OUTPATH)
+            if 'contracts' in sname:
+                self.process_contract_file(sname, OUTPATH)
 
             if 'grants' in sname:   
                 self.process_grant_file(sname, OUTPATH)
@@ -108,22 +108,26 @@ class Command(BaseCommand):
         print "it's a contract file"
         print "processing file {0}".format(sname)
         line_total = 0
-        reader = csv.reader(open(OUTPATH + sname), delimiter='|')
-        for line in reader:
-            self.update_contract_row(line)
-            if line_total % 1000 == 0: print "... on line {0}".format(line_total)
-            line_total += 1
+        with open(OUTPATH + sname) as f:
+            reader = csv.reader(f, delimiter='|')
+            for line in reader:
+                self.update_contract_row(line)
+                if line_total % 1000 == 0: print "... on line {0}".format(line_total)
+                line_total += 1
+
+            line = None
 
     @transaction.commit_on_success
     def process_grant_file(self, sname, OUTPATH):
         print "it's a grant file"
         print "processing file {0}".format(sname)
         line_total = 0
-        reader = csv.reader(open(OUTPATH + sname), delimiter='|')
-        for line in reader:
-            self.update_grant_row(line)
-            if line_total % 1000 == 0: print "... on line {0}".format(line_total)
-            line_total += 1
+        with open(OUTPATH + sname) as f:
+            reader = csv.reader(f, delimiter='|')
+            for line in reader:
+                self.update_grant_row(line)
+                if line_total % 1000 == 0: print "... on line {0}".format(line_total)
+                line_total += 1
 
     def check_fiscal_year(self, line, num):
         if len(line) >= (num):
@@ -148,6 +152,9 @@ class Command(BaseCommand):
                 c.delete()
             except Contract.DoesNotExist as e:
                 pass
+            except Contract.MultipleObjectsReturned as e:
+                for con in Contract.objects.filter(unique_transaction_id=line[0], fiscal_year=line[97]):
+                    con.delete()
             return
         else:
             if not self.check_fiscal_year(line, 97):
@@ -155,11 +162,9 @@ class Command(BaseCommand):
                 return
             try:
                 c = Contract.objects.get(unique_transaction_id=line[0], fiscal_year=line[97])
-                return
             except Contract.DoesNotExist as e:
                 c = Contract(unique_transaction_id=line[0], fiscal_year=line[97])
             except Contract.MultipleObjectsReturned as e:
-                return # get rid of
                 # delete extra objects
                 cset = Contract.objects.filter(unique_transaction_id=line[0], fiscal_year=line[97]).order_by('-id')
                 for i, obj in enumerate(cset):
@@ -184,6 +189,7 @@ class Command(BaseCommand):
                 setattr(c, column_name, value)
             c.save()
 
+
     def update_grant_row(self, line):
 
         #To Do: add logging for transactions that fail
@@ -200,6 +206,9 @@ class Command(BaseCommand):
                 c.delete()
             except Grant.DoesNotExist as e:
                 pass
+            except Grant.MultipleObjectsReturned as e:
+                for c in Grant.objects.filter(unique_transaction_id=line[0], fiscal_year=line[46]):
+                    c.delete()
             return
         else:
             if not self.check_fiscal_year(line, 46):
