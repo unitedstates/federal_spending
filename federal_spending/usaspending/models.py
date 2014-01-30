@@ -376,7 +376,7 @@ class Grant(models.Model):
         super(Grant, self).save()
 
     def delete(self, *args, **kwargs):
-        Grantt.objects.in_fiscal_year(self.fiscal_year)
+        Grant.objects.in_fiscal_year(self.fiscal_year)
         super(Grant, self).delete()
 
     class Meta:
