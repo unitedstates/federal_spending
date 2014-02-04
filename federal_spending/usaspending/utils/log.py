@@ -29,7 +29,7 @@ def set_up_logger(importer_name, log_path, email_subject, email_recipients=setti
     log.addHandler(ch)
 
     # create email handler and set level to warn
-    c="""if settings.LOGGING_EMAIL:
+    if settings.LOGGING_EMAIL:
         eh = logging.handlers.SMTPHandler(
             (settings.LOGGING_EMAIL['host'], settings.LOGGING_EMAIL['port']), # host
             settings.LOGGING_EMAIL['username'], # from address
@@ -40,6 +40,6 @@ def set_up_logger(importer_name, log_path, email_subject, email_recipients=setti
         eh.setLevel(logging.WARN)
         eh.setFormatter(formatter)
         eh.setFormatter(EncodingFormatter('%(message)s', encoding='iso8859-1'))
-        log.addHandler(eh)"""
+        log.addHandler(eh)
 
     return log
