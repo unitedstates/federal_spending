@@ -46,11 +46,6 @@ manage.py dbshell < tsconfig.sql
 
 tsconfig.sql is also located in the project's root directory. This is a one time step that only needs to be repeated if you blow away your whole database, not just the tables. 
 
-#create empty directories for the processing of CSVS in usaspending/downloads/csvs
-# usaspending/downloads/csvs/out
-# usaspending/downloads/csvs/done
-# usaspending/downloads/csvs/rejected
-# usaspending/downloads/csvs/dailies
 
 
 Importing Contracts and Grants
