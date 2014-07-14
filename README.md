@@ -24,7 +24,7 @@ Usage
 ----------
 
 
-To get started, install the dependencies while in an [activated python virtal environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) and using [pip](http://www.pip-installer.org/en/latest/installing.html)
+To get started, install the dependencies while in an [activated python virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/) and using [pip](http://www.pip-installer.org/en/latest/installing.html)
 
     pip install -r requirements.txt
 
@@ -33,8 +33,8 @@ For the USASpending data, you will need to specify which fiscal years you want t
 Postgresql settings
 -------------------
 
-After filling in your database settings in the Django settings file, run
-    manage.py syncdb
+After filling in your database settings in the Django settings file, run 
+    `manage.py syncdb`
 to create the tables.
 
 If you are using postgresql and will be using the indexes with this project, you will need to create some text search elements within postgresql. To do that, move the file in the root directory of the project (federal_spending.stop) to your postgresql text search directory. On version 9.1, that is
@@ -42,7 +42,7 @@ If you are using postgresql and will be using the indexes with this project, you
 
 Once you move the stopwords file, you can create the text search indexes like this:
 
-manage.py dbshell < tsconfig.sql
+    manage.py dbshell < tsconfig.sql  
 
 tsconfig.sql is also located in the project's root directory. This is a one time step that only needs to be repeated if you blow away your whole database, not just the tables.
 
@@ -53,20 +53,20 @@ Importing Contracts and Grants
 
 The download, cleaning and import processes are broken out into their own Django management commands. To do a fresh import from scratch (and run all the commands at the same time with some sensible defaults) you can run:
 
-manage.py fresh_import
+    manage.py fresh_import
 
 This will automatically download the files in federal_spending/usaspending/downloads/all_downloads.txt process them and store them in the database. The default contents of that file are 14 years of fiscal data so just go in and remove some links if you don't need all of that.
 
 Alternatively, if you want to run the commands individually, either to debug or just see how it works, you can. Here's the steps, each with their own manage command:
 
-*   manage.py download_files FILENAME    #download and unzip all the links in FILENAME
-*   manage.py convert_usaspending_contracts    #normalizes all the data and dumps into a better structured CSV
-*   manage.py convert_usaspending_grants     # ditto, but for grants
-*   manage.py syncdb  #create tables
-*   manage.py create_partition --fiscal-year all  #create postgresql partitions
-*   manage.py loadcontracts FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
-*   manage.py loadgrants FILENAME   #copy the csv FILENAME (will appear in out folder) into the contracts table
-*   manage.py build_indexes  -- Not implemented
+*   `manage.py download_files FILENAME`  -- download and unzip all the links in FILENAME
+*   `manage.py convert_usaspending_contract`  -- normalizes all the data and dumps into a better structured CSV
+*   `manage.py convert_usaspending_grants`  -- ditto, but for grants
+*   `manage.py syncdb`  -- create tables
+*   `manage.py create_partition --fiscal-year all`  -- create postgresql partitions
+*   `manage.py loadcontracts FILENAME`  -- copy the csv FILENAME (will appear in out folder) into the contracts table
+*   `manage.py loadgrants FILENAME`  -- copy the csv FILENAME (will appear in out folder) into the contracts table 
+*   `manage.py build_indexes`  -- Not implemented
 
 
 
@@ -114,12 +114,9 @@ Same deal as the contracts except you use it for grants files.
 manage.py create_indexes
 -------------------------------
 
-./manage.py create_indexes
+`./manage.py create_indexes`
 
 That's it!
-
-run tests to ensure import --> write tests, check against usaspending api
-
 
 ## Public domain
 
@@ -128,3 +125,6 @@ This project is [dedicated to the public domain](LICENSE). As spelled out in [CO
 > The project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](http://creativecommons.org/publicdomain/zero/1.0/).
 
 > All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
+
+TO DO:
+run tests to ensure import --> write tests, check against [usaspending api](http://www.usaspending.gov/data?carryfilters=on)
